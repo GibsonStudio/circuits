@@ -8,6 +8,7 @@ function Battery (args) {
   this.id = args.id || "battery-" + Math.floor(Math.random() * 100000);
   this.x = args.x || 300;
   this.y = args.y || 300;
+  this.container = args.container || document.body;
 
   this.output = typeof(args.output) !== 'undefined' ? args.output : 1.5;
 
@@ -16,7 +17,7 @@ function Battery (args) {
   this.update = function () {
 
     if ($("#" + this.id).length == 0) {
-      document.body.appendChild(this.el());
+      this.container.appendChild(this.el());
     }
 
     var myV = Math.round(this.output * 10) / 10;
@@ -38,7 +39,7 @@ function Battery (args) {
 
     var el = document.createElement("div");
     el.id = this.id;
-    el.style.setProperty("position", "fixed");
+    el.style.setProperty("position", "absolute");
     el.style.setProperty("left", this.x + "px");
     el.style.setProperty("top", this.y + "px");
     el.style.setProperty("width", "60px");

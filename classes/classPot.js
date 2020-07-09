@@ -8,6 +8,7 @@ function Pot (args) {
   this.id = args.id || "pot-" + Math.floor(Math.random() * 100000);
   this.x = args.x || 500;
   this.y = args.y || 300;
+  this.container = args.container || document.body;
 
   this.val = typeof(args.val) !== 'undefined' ? args.val : 1;
   this.inputs = args.inputs || [];
@@ -19,7 +20,6 @@ function Pot (args) {
 
   var myThis = this;
   window.addEventListener("mousemove", function (event) { myThis.moveMe(event); });
-  //window.addEventListener("mousedown", function (event) { myThis.startAdjust(event); });
   window.addEventListener("mouseup", function (event) { myThis.stopAdjust(event); });
 
 
@@ -28,7 +28,7 @@ function Pot (args) {
   this.update = function () {
 
     if ($("#" + this.id).length == 0) {
-      document.body.appendChild(this.el());
+      this.container.appendChild(this.el());
     }
 
     var inV = 0;
@@ -63,7 +63,7 @@ function Pot (args) {
 
     var el = document.createElement("div");
     el.id = this.id;
-    el.style.setProperty("position", "fixed");
+    el.style.setProperty("position", "absolute");
     el.style.setProperty("left", this.x + "px");
     el.style.setProperty("top", this.y + "px");
     el.style.setProperty("width", "60px");

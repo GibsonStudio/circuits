@@ -7,6 +7,7 @@ function Voltmeter (args) {
   this.id = args.id || "voltmeter-" + Math.floor(Math.random() * 100000);
   this.x = args.x || 600;
   this.y = args.y || 600;
+  this.container = args.container || document.body;
 
   this.inputs = args.inputs || [];
   this.inputMax = args.inputMax || 6;
@@ -21,7 +22,7 @@ function Voltmeter (args) {
   this.update = function () {
 
     if ($("#" + this.id).length == 0) {
-      document.body.appendChild(this.el());
+      this.container.appendChild(this.el());
     }
 
     var inV = 0;
@@ -66,7 +67,7 @@ function Voltmeter (args) {
 
     var el = document.createElement("div");
     el.id = this.id;
-    el.style.setProperty("position", "fixed");
+    el.style.setProperty("position", "absolute");
     el.style.setProperty("left", this.x + "px");
     el.style.setProperty("top", this.y + "px");
     el.style.setProperty("width", "60px");

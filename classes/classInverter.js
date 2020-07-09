@@ -8,6 +8,7 @@ function Inverter (args) {
   this.id = args.id || "inverter-" + Math.floor(Math.random() * 100000);
   this.x = args.x || 300;
   this.y = args.y || 0;
+  this.container = args.container || document.body;
 
   this.on = typeof(args.val) !== 'undefined' ? args.val : 0;
   this.inputs = args.inputs || [];
@@ -21,7 +22,7 @@ function Inverter (args) {
   this.update = function () {
 
     if ($("#" + this.id).length == 0) {
-      document.body.appendChild(this.el());
+      this.container.appendChild(this.el());
     }
 
     var inV = 0;
@@ -68,7 +69,7 @@ function Inverter (args) {
     var im = this.on ? 'inverter-ON.png' : 'inverter-OFF.png';
     var el = document.createElement("div");
     el.id = this.id;
-    el.style.setProperty("position", "fixed");
+    el.style.setProperty("position", "absolute");
     el.style.setProperty("left", this.x + "px");
     el.style.setProperty("top", this.y + "px");
     el.style.setProperty("width", "60px");
